@@ -1,17 +1,7 @@
 #include "LowPassFilter.h"
 
-Kernel::Kernel(const size_t size, const float * values) :size(size), kernelOffset(std::floor(size / 2))
-{
-	_kernel = new float[size];
-	memcpy_s(_kernel, size, values, size);
-}
 
-Kernel::~Kernel()
-{
-	delete _kernel;
-}
-
-LowPassFilter::LowPassFilter(const size_t symmetricSize) : kernelWidth(symmetricSize)
+LowPassFilter::LowPassFilter(const size_t symmetricSize) : kernelWidth(symmetricSize), kernelOffset(std::floor(symmetricSize / 2))
 {
 }
 LowPassFilter::~LowPassFilter()
@@ -41,7 +31,7 @@ SimpleImage LowPassFilter::apply(const SimpleImage & img)
 size_t LowPassFilter::calculateIndexClamp(const int i, const int j, const int k, const ImageInfo & info)
 {
 	int index = i + info.width*j + k;
-	index -= kernel->kernelOffset;
+	index -= kernelOffset;
 
 	return index;
 }
