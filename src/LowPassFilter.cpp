@@ -7,7 +7,6 @@ LowPassFilter::LowPassFilter(const size_t symmetricSize) : kernelWidth(symmetric
 LowPassFilter::~LowPassFilter()
 {
 }
-
 SimpleImage LowPassFilter::apply(const SimpleImage & img)
 {
 	const ImageInfo info = img.getImageInfo();

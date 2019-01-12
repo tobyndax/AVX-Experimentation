@@ -2,6 +2,8 @@
 */
 #include "pgm.h"
 #include "LowPassFilter.h"
+#include "TimeUtils.h"
+
 
 #include <iostream>
 #include <string>
@@ -21,15 +23,22 @@
 int main(){
     PGMReader pgmReader;
     SimpleImage* img = pgmReader.read("H:/Programmering/AVX-Experimentation/testData/baboon.ascii.pgm");
-    std::cout << "Width: "  <<  img->getImageInfo().width  <<  " Height: "  << img->getImageInfo().height;
+	std::cout << "Width: " << img->getImageInfo().width << " Height: " << img->getImageInfo().height << std::endl;
 
     //Process the image here. 
 	LowPassFilter filt{ 9 };
-	SimpleImage newImg = filt.apply(*img);
+	SimpleImage outputImg{0,0};
 
+	Time t1 = timeNow();
+	const int iterations = 10;
+	for (int i = 0; i < iterations; i++) {
+		outputImg = filt.apply(*img);
+	}
+	
+	std::cout << durationMilli(timeNow() - t1) / iterations << " ms" << std::endl;
 
     PGMWriter writer;
-    writer.write("H:/Programmering/AVX-Experimentation/baboon_mine.ascii.pgm", newImg);
+    writer.write("H:/Programmering/AVX-Experimentation/baboon_mine.ascii.pgm", outputImg);
 
     return 0;
 }
