@@ -25,10 +25,11 @@ int main(){
 
     //Process the image here. 
 	LowPassFilter filt{ 9 };
+	SimpleImage newImg = filt.apply(*img);
 
 
     PGMWriter writer;
-    writer.write("H:/Programmering/AVX-Experimentation/baboon_mine.ascii.pgm", *img);
+    writer.write("H:/Programmering/AVX-Experimentation/baboon_mine.ascii.pgm", newImg);
 
     return 0;
 }

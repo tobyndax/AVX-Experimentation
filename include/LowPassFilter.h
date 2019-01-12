@@ -12,4 +12,5 @@ private:
 	const size_t kernelWidth = 0;
 	const size_t kernelOffset = 0;
 	size_t calculateIndexClamp(const int i, const  int j, const int k, const ImageInfo&  info);
+	size_t calculateIndexClamp_transposed(const int i, const  int j, const int k, const ImageInfo&  info);
 };
