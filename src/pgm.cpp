@@ -1,6 +1,6 @@
 /* Author Jens Edhammer
 */
-#include "pgm.hpp"
+#include "pgm.h"
 #include <iostream>
 #include <sstream>
 

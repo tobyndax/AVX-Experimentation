@@ -1,9 +1,11 @@
 /* Author Jens Edhammer
 */
+#include "pgm.h"
+#include "LowPassFilter.h"
+
 #include <iostream>
 #include <string>
 #include <immintrin.h>
-#include "pgm.hpp"
 
 /*  This small code base contains a PlainPGM (ASCII "P2") reader and writer to easily get images into the program
  *  and to easily output them to file again. 
@@ -18,13 +20,15 @@
 
 int main(){
     PGMReader pgmReader;
-    SimpleImage* img = pgmReader.read("H:/Programmering/SSEGuide/testData/baboon.ascii.pgm");
+    SimpleImage* img = pgmReader.read("H:/Programmering/AVX-Experimentation/testData/baboon.ascii.pgm");
     std::cout << "Width: "  <<  img->getImageInfo().width  <<  " Height: "  << img->getImageInfo().height;
 
     //Process the image here. 
+	LowPassFilter filt{ 9 };
+
 
     PGMWriter writer;
-    writer.write("H:/Programmering/SSEGuide/baboon_mine.ascii.pgm", *img);
+    writer.write("H:/Programmering/AVX-Experimentation/baboon_mine.ascii.pgm", *img);
 
     return 0;
 }
